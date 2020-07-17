@@ -1,0 +1,33 @@
+void setup()
+{
+  pinMode(8, OUTPUT);
+  pinMode(7, INPUT);
+  pinMode(2,INPUT);
+  Serial.begin(9600);
+  attachInterrupt(digitalPinToInterrupt(2),swapMode,RISING);
+}
+
+int val=0;
+bool test=HIGH;
+
+void loop(){
+  
+  
+  val=digitalRead(7);
+  
+  if (val==test){
+  	digitalWrite(8, HIGH);
+    Serial.println("LIGHT ON");
+  }
+  else {
+    digitalWrite(8, LOW);
+    Serial.println("LIGHT OFF");
+  };
+  delay(100);
+}
+
+void swapMode(){
+  test=!test;
+  Serial.println("INTERRUPT DETECTED");
+  Serial.println("MODE SWAPPED");
+}
